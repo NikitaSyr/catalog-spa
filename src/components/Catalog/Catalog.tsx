@@ -1,28 +1,18 @@
-import {FC, useEffect, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {getItemsList, requestItems} from "../../redux/itemsReducer";
-import Preloader from "../Common/Preloader/Preloader";
+import {FC} from "react";
+import {ItemsType} from "../../types/types";
+import CatalogItem from "./CatalogItem/CatalogItem";
 
-type PropsType = {}
+type PropsType = {
+    itemsList: Array<ItemsType>
+}
 
-const Catalog: FC<PropsType> = () => {
-    const [loading, setLoading] = useState(false);
-    const itemsList = useSelector(getItemsList);
-    const dispatch = useDispatch();
-    useEffect(() => {
-        (async () => {
-            setLoading(true);
-            await dispatch(requestItems());
-            setLoading(false);
-        })()
-
-        }, [dispatch])
-    console.log(itemsList);
+const Catalog: FC<PropsType> = (props) => {
+    console.log(props.itemsList);
+    let catalogElement = props.itemsList.map(c =>
+        <CatalogItem key={c.id} id={c.id} image={c.image} name={c.name} price={c.price}/>)
     return (
         <div>
-            {loading
-                ? <Preloader/>
-            : <div>Загрузилось</div>}
+            {catalogElement}
         </div>
     )
 }

@@ -1,17 +1,17 @@
-import {catalogAPI} from "../api/api";
 import {AppStateType, BaseThunkType, InferActionsTypes} from "./reduxStore";
 import {Dispatch} from "redux";
 import {ItemsType} from "../types/types";
 
-const SET_ITEMS = 'ITEMS/SET_ITEMS';
+const ADD_ITEMS = 'CART/ADD_ITEMS';
+
 
 let initialState = {
-    itemsList: [] as Array<ItemsType>,
+    itemsCount: 0 as number,
 }
 
-const itemsReducer = (state = initialState, action: ActionsTypes) => {
+const cartReducer = (state = initialState, action: ActionsTypes) => {
     switch (action.type) {
-        case SET_ITEMS: {
+        case ADD_ITEMS: {
             return {
                 ...state,
                 itemsList: action.itemsList,
@@ -23,17 +23,10 @@ const itemsReducer = (state = initialState, action: ActionsTypes) => {
 }
 
 export const actions = {
-    setItemsList: (itemsList: Array<ItemsType>) => ({type: SET_ITEMS, itemsList} as const),
+    setItemsList: (itemsList: Array<ItemsType>) => ({type: ADD_ITEMS, itemsList} as const),
 }
 
-export const requestItems = (): ThunkType => {
-    return async (dispatch: Dispatch<ActionsTypes>) => {
-        const itemsList = await catalogAPI.getNewItems();
-        dispatch(actions.setItemsList(itemsList));
-    }
-}
-
-export default itemsReducer;
+export default cartReducer;
 
 export type InitialStateType = typeof initialState
 type ActionsTypes = InferActionsTypes<typeof actions>

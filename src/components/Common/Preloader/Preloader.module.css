@@ -2,6 +2,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    /*margin: 25% auto auto auto;*/
-    margin: auto;
+    margin: 25% auto auto auto;
+    /*margin: auto;*/
+    background-color: #2B3449;
 }

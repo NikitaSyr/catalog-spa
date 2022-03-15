@@ -1,9 +1,9 @@
 .app__header {
     /*background-color: rgb(192, 221, 227);*/
-    background-color: #418896;
+    background-color: #823d43;
     height: 8%;
     max-height: 125px;
-    margin: 0.5% 0 0.75%;
+    margin-bottom: 0.75%;
     border-radius: 5px;
 
 }
@@ -49,20 +49,20 @@
 
 .login__info {
     padding: 4%;
-    color: rgb(29, 29, 29);
-    background-color: #C0DDE3;
+    color: #FFF9F9;
+    background-color: #5e2431;
     line-height: 1.4;
     border-radius: 5px;
     margin-right: 5px;
 }
 
 .login__info a {
-    color: rgb(29, 29, 29);
+    color: #FFF9F9;
 }
 
 .login__info button {
-    background-color: #418896;
-    color: #e6f8fb;
+    background-color: #5e2431;
+    color: #FFF9F9;
     text-align: center;
     font-size: 21px;
     line-height: 1.4;
