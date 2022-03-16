@@ -11,6 +11,8 @@ import Preloader from "./components/Common/Preloader/Preloader";
 function App() {
     const [loading, setLoading] = useState(false);
     const itemsList = useSelector(getItemsList);
+    // const cartItems = useSelector(getCartItems);
+    // console.log(cartItems);
     const dispatch = useDispatch();
     useEffect(() => {
         (async () => {
