@@ -2,6 +2,8 @@ import {FC} from "react";
 import {ItemsType} from "../../types/types";
 import CatalogItem from "./CatalogItem/CatalogItem";
 import s from './Catalog.module.css';
+import {useDispatch} from "react-redux";
+import {actions} from "../../redux/itemsReducer";
 
 type PropsType = {
     itemsList: Array<ItemsType>
@@ -9,8 +11,16 @@ type PropsType = {
 
 const Catalog: FC<PropsType> = (props) => {
     console.log(props.itemsList);
-    let catalogElement = props.itemsList.map(c =>
-        <CatalogItem key={c.id} id={c.id} image={c.image} name={c.name} price={c.price}/>)
+    const dispatch = useDispatch();
+    // const addToCard = actions.setItemsList(id)
+    const addItemToCartById = (id: number) => {
+        dispatch(actions.addToCartAC(id))
+    }
+
+    let catalogElement = props.itemsList.map(item =>
+        <CatalogItem key={item.id} id={item.id} image={item.image} name={item.name} price={item.price}
+                     addItemToCartById={addItemToCartById}
+        />)
     return (
         <div className={s.catalog}>
             {catalogElement}

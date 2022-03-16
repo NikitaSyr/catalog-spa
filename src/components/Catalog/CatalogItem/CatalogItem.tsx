@@ -8,19 +8,31 @@ type PropsType = {
     image: string
     name: string
     price: number
+    addItemToCartById: (id: number) => void
 }
 
-const DialogItem: React.FC<PropsType> = (props) => {
 
+const CatalogItem: React.FC<PropsType> = ({id, image, name, price, addItemToCartById}) => {
+    // const handleClick = useSelector(addToCart(id));
+    // const dispatch = useDispatch();
+    // useEffect(() => {
+    //     dispatch(addToCart(id));
+    // }, [dispatch])
     return (
         <div>
-            <div>Название : "{props.name}"</div>
-            <div>Цена : {props.price} руб.</div>
-            {props.image
-                ? <img src={props.image} alt=""/>
-            : <Preloader/>}
-            <button className="button">Добавить в корзину</button>
-    </div>)
+            <div>Название : "{name}"</div>
+            <div>Цена : {price} руб.</div>
+            {image
+                ? <img src={image} alt=""/>
+                : <Preloader/>}
+            <button className="button"
+                    onClick={() => {
+                        addItemToCartById(id)
+                    }}
+            >Добавить в корзину
+            </button>
+        </div>
+    )
 }
 
-export default DialogItem;
+export default CatalogItem;

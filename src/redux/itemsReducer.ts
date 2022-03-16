@@ -4,7 +4,10 @@ import {Dispatch} from "redux";
 import {ItemsType} from "../types/types";
 
 const SET_ITEMS = 'ITEMS/SET_ITEMS';
-// const ADD_ITEM = 'ITEMS/ADD_ITEM';
+const ADD_TO_CART = 'ITEMS/ADD_TO_CART';
+const REMOVE_ITEM = 'ITEMS/REMOVE_ITEM';
+const SUB_QUANTITY = 'ITEMS/SUB_QUANTITY';
+const ADD_QUANTITY = 'ITEMS/ADD_QUANTITY';
 
 // type CartItemType = {
 //     id: number,
@@ -13,14 +16,14 @@ const SET_ITEMS = 'ITEMS/SET_ITEMS';
 // }
 
 let initialState = {
-    itemsList: [] as Array<ItemsType>,
+    itemsList: [{id: 0, image: '', name: "", price: 0}] as Array<ItemsType>,
 //     totalItemsCount: 0 as number,
 //     totalItemsSum : 0 as number,
 //     cartItems : [] as Array<CartItemType>,
     addedItems: [] as Array<ItemsType>,
-    total: 0 as number,
+    totalCount: 0 as number,
+    totalPrice: 0 as number,
 }
-
 
 
 const itemsReducer = (state = initialState, action: ActionsTypes) => {
@@ -31,28 +34,98 @@ const itemsReducer = (state = initialState, action: ActionsTypes) => {
                 itemsList: action.itemsList,
             }
         }
-        // case ADD_ITEM: {
-        //     let cartData = action.cartItems;
-        //     return {
-        //         ...state,
-        //         // @ts-ignore
-        //         cartItems: [...state.cartItems, {id: cartData.id, itemsCount: cartData.itemsCount + 1, itemsSum: cartData.itemsSum}],
-        //     }
-        // }
+        case ADD_TO_CART: {
+            let addedItem = state.itemsList.find(item => item.id === action.id)
+            let existed_item = state.addedItems.find(item => action.id === item.id)
+
+            if (addedItem) {
+                if (existed_item) {
+                    addedItem.quantity += 1;
+                    console.log(addedItem)
+                    return {
+                        ...state,
+                        totalPrice: state.totalPrice + addedItem.price,
+                        totalCount: state.totalCount + 1
+                    }
+                } else {
+                    addedItem.quantity = 1;
+                    let newTotal = state.totalPrice + addedItem.price
+                    return {
+                        ...state,
+                        addedItems: [...state.addedItems, addedItem],
+                        totalPrice: newTotal
+                    }
+
+                }
+            }
+            return state;
+        }
+        case REMOVE_ITEM: {
+            let itemToRemove = state.addedItems.find(item => action.id === item.id)
+            let new_items = state.addedItems.filter(item => action.id !== item.id)
+
+            if (itemToRemove) {
+                let newTotal = state.totalPrice - (itemToRemove.price * itemToRemove.quantity)
+                // console.log(itemToRemove)
+                return {
+                    ...state,
+                    addedItems: new_items,
+                    total: newTotal
+                }
+            }
+            return state;
+        }
+        case ADD_QUANTITY: {
+            let addedItem = state.itemsList.find(item => item.id === action.id)
+            if (addedItem) {
+                addedItem.quantity += 1
+                let newTotal = state.totalPrice + addedItem.price
+                return {
+                    ...state,
+                    total: newTotal
+                }
+            }
+            return state;
+        }
+        case SUB_QUANTITY: {
+            let addedItem = state.itemsList.find(item => item.id === action.id)
+            if (addedItem) {
+                if (addedItem.quantity === 1) {
+                    let new_items = state.addedItems.filter(item => item.id !== action.id)
+                    let newTotal = state.totalPrice - addedItem.price
+                    return {
+                        ...state,
+                        addedItems: new_items,
+                        total: newTotal
+                    }
+                } else {
+                    addedItem.quantity -= 1
+                    let newTotal = state.totalPrice - addedItem.price
+                    return {
+                        ...state,
+                        total: newTotal
+                    }
+                }
+            }
+            return state;
+        }
         default:
             return state;
     }
 }
 
 export const actions = {
-    setItemsList: (itemsList: Array<ItemsType>) => ({type: SET_ITEMS, itemsList} as const),
-    // addItemsToCart: (cartItems: Array<CartItemType>) => ({type: ADD_ITEM, cartItems} as const),
+    setItemsListAC: (itemsList: Array<ItemsType>) => ({type: SET_ITEMS, itemsList} as const),
+    addToCartAC: (id: number) => ({type: ADD_TO_CART, id} as const),
+    removeItemAC: (id: number) => ({type: REMOVE_ITEM, id} as const),
+    subtractQuantityAC: (id: number) => ({type: SUB_QUANTITY, id} as const),
+    addQuantityAC: (id: number) => ({type: ADD_QUANTITY, id} as const),
 }
 
 export const requestItems = (): ThunkType => {
     return async (dispatch: Dispatch<ActionsTypes>) => {
         const itemsList = await catalogAPI.getNewItems();
-        dispatch(actions.setItemsList(itemsList));
+        dispatch(actions.setItemsListAC(itemsList));
     }
 }
 
@@ -67,7 +140,15 @@ export const getItemsList = (state: AppStateType) => {
     return state.itemsPage.itemsList;
 }
 
+export const getCartItems = (state: AppStateType) => {
+    return state.itemsPage.addedItems;
+}
+
+export const getTotalPrice = (state: AppStateType) => {
+    return state.itemsPage.totalPrice;
+}
+
 // export const getCartItems = (state: AppStateType) => {
-//     return state.itemsPage.cartItems;
+//     return state.itemsPage.addedItems;
 // }
 

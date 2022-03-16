@@ -3,4 +3,9 @@ export type ItemsType = {
     image: string
     name: string
     price: number
+    quantity : number
 }
+
+// export type CartType = {
+//     id : number
+// }

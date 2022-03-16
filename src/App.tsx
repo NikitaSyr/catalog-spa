@@ -20,7 +20,6 @@ function App() {
             await dispatch(requestItems());
             setLoading(false);
         })()
-
     }, [dispatch])
     if (loading) {
         return (
