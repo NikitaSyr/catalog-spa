@@ -17,7 +17,7 @@ const Header = () => {
                     </div>
                     <div className={s.header__column}>
                         <div className={s.login__info}>
-                            <NavLink to={`cart`}>Корзина {totalCount !== 0 && `(${totalCount})`}</NavLink>
+                            <NavLink to={`cart`}>Корзина {(totalCount !== 0 && totalCount) && `(${totalCount})`}</NavLink>
                         </div>
                     </div>
                 </div>

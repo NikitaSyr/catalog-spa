@@ -10,7 +10,7 @@ const SUB_QUANTITY = 'ITEMS/SUB_QUANTITY';
 const ADD_QUANTITY = 'ITEMS/ADD_QUANTITY';
 
 let initialState = {
-    itemsList: [{id: 0, image: '', name: "", price: 0}] as Array<ItemsType>,
+    itemsList: [] as Array<ItemsType>,
     addedItems: [] as Array<ItemsType>,
     totalCount: 0 as number,
     totalPrice: 0 as number,
@@ -26,9 +26,9 @@ const itemsReducer = (state = initialState, action: ActionsTypes) => {
             }
         }
         case ADD_TO_CART: {
+            console.log(state.addedItems)
             let addedItem = state.itemsList.find(item => item.id === action.id)
             let existed_item = state.addedItems.find(item => action.id === item.id)
-
             if (addedItem) {
                 if (existed_item) {
                     addedItem.quantity += 1;

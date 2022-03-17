@@ -7,6 +7,7 @@ import Cart from "./components/Cart/Cart";
 import {useDispatch, useSelector} from "react-redux";
 import {getItemsList, requestItems} from "./redux/itemsReducer";
 import Preloader from "./components/Common/Preloader/Preloader";
+import {log} from "util";
 
 function App() {
     const [loading, setLoading] = useState(false);
