@@ -1,6 +1,8 @@
 import {Action, applyMiddleware, combineReducers, compose, createStore} from "redux";
 import itemsReducer from "./itemsReducer";
 import thunkMiddleware, {ThunkAction} from "redux-thunk";
+import { persistStore, persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
 
 let rootReducer = combineReducers({
     itemsPage: itemsReducer,
@@ -12,9 +14,17 @@ export type AppStateType = ReturnType<RootReducerType>
 export type InferActionsTypes<T> = T extends { [keys: string]: (...args: any[]) => infer U } ? U : never
 export type BaseThunkType<A extends Action = Action, R = Promise<void>> = ThunkAction<R, AppStateType, unknown, A>
 
+const persistConfig = {
+    key: 'root',
+    storage,
+}
+const persistedReducer = persistReducer(persistConfig, rootReducer)
+
+
 // @ts-ignore
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
-const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunkMiddleware)));
+const store = createStore(persistedReducer, composeEnhancers(applyMiddleware(thunkMiddleware)));
+export const persistor = persistStore(store)
 
 export default store
