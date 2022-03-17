@@ -22,9 +22,9 @@ const CartItem: React.FC<PropsType> = ({id, image, name,
         <div>
             <div>Название : "{name}"</div>
             <div>Цена : {price} руб.</div>
-            {image
-                ? <img src={image} alt=""/>
-                : <Preloader/>}
+            {/*{image*/}
+            {/*    ? <img src={image} alt=""/>*/}
+            {/*    : <Preloader/>}*/}
             <button className="button"
                     onClick={() => {
                         addItemQuantityById(id)

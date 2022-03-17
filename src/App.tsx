@@ -20,6 +20,7 @@ function App() {
             setLoading(true);
             await dispatch(requestItems());
             setLoading(false);
+            console.log("Произошло сетание")
         })()
     }, [dispatch])
     if (loading) {

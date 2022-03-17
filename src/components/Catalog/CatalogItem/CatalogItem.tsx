@@ -22,9 +22,9 @@ const CatalogItem: React.FC<PropsType> = ({id, image, name, price, addItemToCart
         <div>
             <div>Название : "{name}"</div>
             <div>Цена : {price} руб.</div>
-            {image
-                ? <img src={image} alt=""/>
-                : <Preloader/>}
+            {/*{image*/}
+            {/*    ? <img src={image} alt=""/>*/}
+            {/*    : <Preloader/>}*/}
             <button className="button"
                     onClick={() => {
                         addItemToCartById(id)
