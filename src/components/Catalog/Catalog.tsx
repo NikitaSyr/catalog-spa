@@ -10,14 +10,12 @@ type PropsType = {
 }
 
 const Catalog: FC<PropsType> = (props) => {
-    console.log(props.itemsList);
     const dispatch = useDispatch();
-    // const addToCard = actions.setItemsList(id)
     const addItemToCartById = (id: number) => {
         dispatch(actions.addToCartAC(id))
     }
 
-    let catalogElement = props.itemsList.map(item =>
+    const catalogElement = props.itemsList.map(item =>
         <CatalogItem key={item.id} id={item.id} image={item.image} name={item.name} price={item.price}
                      addItemToCartById={addItemToCartById}
         />)

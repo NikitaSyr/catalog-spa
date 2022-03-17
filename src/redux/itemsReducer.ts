@@ -9,17 +9,8 @@ const REMOVE_ITEM = 'ITEMS/REMOVE_ITEM';
 const SUB_QUANTITY = 'ITEMS/SUB_QUANTITY';
 const ADD_QUANTITY = 'ITEMS/ADD_QUANTITY';
 
-// type CartItemType = {
-//     id: number,
-//     itemsCount: number,
-//     itemsSum : number,
-// }
-
 let initialState = {
     itemsList: [{id: 0, image: '', name: "", price: 0}] as Array<ItemsType>,
-//     totalItemsCount: 0 as number,
-//     totalItemsSum : 0 as number,
-//     cartItems : [] as Array<CartItemType>,
     addedItems: [] as Array<ItemsType>,
     totalCount: 0 as number,
     totalPrice: 0 as number,
@@ -41,7 +32,6 @@ const itemsReducer = (state = initialState, action: ActionsTypes) => {
             if (addedItem) {
                 if (existed_item) {
                     addedItem.quantity += 1;
-                    console.log(addedItem)
                     return {
                         ...state,
                         totalPrice: state.totalPrice + addedItem.price,
@@ -53,7 +43,8 @@ const itemsReducer = (state = initialState, action: ActionsTypes) => {
                     return {
                         ...state,
                         addedItems: [...state.addedItems, addedItem],
-                        totalPrice: newTotal
+                        totalPrice: newTotal,
+                        totalCount: state.totalCount + 1
                     }
 
                 }
@@ -70,7 +61,8 @@ const itemsReducer = (state = initialState, action: ActionsTypes) => {
                 return {
                     ...state,
                     addedItems: new_items,
-                    total: newTotal
+                    totalPrice: newTotal,
+                    totalCount: state.totalCount - itemToRemove.quantity
                 }
             }
             return state;
@@ -82,7 +74,8 @@ const itemsReducer = (state = initialState, action: ActionsTypes) => {
                 let newTotal = state.totalPrice + addedItem.price
                 return {
                     ...state,
-                    total: newTotal
+                    totalPrice: newTotal,
+                    totalCount: state.totalCount + 1
                 }
             }
             return state;
@@ -96,14 +89,16 @@ const itemsReducer = (state = initialState, action: ActionsTypes) => {
                     return {
                         ...state,
                         addedItems: new_items,
-                        total: newTotal
+                        totalPrice: newTotal,
+                        totalCount: state.totalCount - 1
                     }
                 } else {
                     addedItem.quantity -= 1
                     let newTotal = state.totalPrice - addedItem.price
                     return {
                         ...state,
-                        total: newTotal
+                        totalPrice: newTotal,
+                        totalCount: state.totalCount - 1
                     }
                 }
             }
@@ -140,7 +135,7 @@ export const getItemsList = (state: AppStateType) => {
     return state.itemsPage.itemsList;
 }
 
-export const getCartItems = (state: AppStateType) => {
+export const getAddedItems = (state: AppStateType) => {
     return state.itemsPage.addedItems;
 }
 
@@ -148,7 +143,7 @@ export const getTotalPrice = (state: AppStateType) => {
     return state.itemsPage.totalPrice;
 }
 
-// export const getCartItems = (state: AppStateType) => {
-//     return state.itemsPage.addedItems;
-// }
+export const getTotalCount = (state: AppStateType) => {
+    return state.itemsPage.totalCount;
+}
 

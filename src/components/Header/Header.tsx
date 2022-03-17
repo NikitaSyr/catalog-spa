@@ -1,9 +1,11 @@
 import s from './Header.module.css';
 import React from "react";
 import {NavLink} from "react-router-dom";
+import {useSelector} from "react-redux";
+import {getTotalCount} from "../../redux/itemsReducer";
 
-const Header = (props) => {
-
+const Header = () => {
+    const totalCount = useSelector(getTotalCount);
     return (
         <header className={`${s.app__header} ${s.header}`}>
             <div className="container">
@@ -15,7 +17,7 @@ const Header = (props) => {
                     </div>
                     <div className={s.header__column}>
                         <div className={s.login__info}>
-                            <NavLink to={`cart`}>Корзина</NavLink>
+                            <NavLink to={`cart`}>Корзина {totalCount !== 0 && `(${totalCount})`}</NavLink>
                         </div>
                     </div>
                 </div>
