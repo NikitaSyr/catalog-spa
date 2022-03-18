@@ -26,7 +26,6 @@ const itemsReducer = (state = initialState, action: ActionsTypes) => {
             }
         }
         case ADD_TO_CART: {
-            console.log(state.addedItems)
             let addedItem = state.itemsList.find(item => item.id === action.id)
             let existed_item = state.addedItems.find(item => action.id === item.id)
             if (addedItem) {
@@ -57,7 +56,6 @@ const itemsReducer = (state = initialState, action: ActionsTypes) => {
 
             if (itemToRemove) {
                 let newTotal = state.totalPrice - (itemToRemove.price * itemToRemove.quantity)
-                // console.log(itemToRemove)
                 return {
                     ...state,
                     addedItems: new_items,

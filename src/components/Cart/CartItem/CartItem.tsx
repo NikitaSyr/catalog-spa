@@ -1,49 +1,54 @@
 import React from 'react';
-import Preloader from "../../Common/Preloader/Preloader";
-import './../../../App.css';
+import t from "./CartItem.module.css";
 
 
 type PropsType = {
     id: number
-    image: string
     name: string
     price: number
+    quantity: number
     addItemQuantityById: (id: number) => void
     subtractItemQuantityById: (id: number) => void
     removeItemQuantityById: (id: number) => void
 }
 
 
-const CartItem: React.FC<PropsType> = ({id, image, name,
-                                           price,addItemQuantityById,
-                                           subtractItemQuantityById, removeItemQuantityById}) => {
+const CartItem: React.FC<PropsType> = ({
+                                           id, name, quantity,
+                                           price, addItemQuantityById,
+                                           subtractItemQuantityById, removeItemQuantityById
+                                       }) => {
 
     return (
-        <div>
-            <div>Название : "{name}"</div>
-            <div>Цена : {price} руб.</div>
-            {/*{image*/}
-            {/*    ? <img src={image} alt=""/>*/}
-            {/*    : <Preloader/>}*/}
-            <button className="button"
-                    onClick={() => {
-                        addItemQuantityById(id)
-                    }}
-            >+
-            </button>
-            <button className="button"
-                    onClick={() => {
-                        subtractItemQuantityById(id)
-                    }}
-            >-
-            </button>
-            <button className="button"
-                    onClick={() => {
-                        removeItemQuantityById(id)
-                    }}
-            >Удалить
-            </button>
-        </div>
+
+        <>
+            <tr className={t.table}>
+
+                <td>"{name}"</td>
+                <td>{price} руб.</td>
+                <td>{quantity} шт.</td>
+                <td>
+                    <button className={`${t.table__button} button`}
+                            onClick={() => {
+                                addItemQuantityById(id)
+                            }}
+                    >+
+                    </button>
+                    <button className={`${t.table__button} button`}
+                            onClick={() => {
+                                subtractItemQuantityById(id)
+                            }}
+                    >-
+                    </button>
+                    <button className={`${t.table__button} button`}
+                            onClick={() => {
+                                removeItemQuantityById(id)
+                            }}
+                    >Удалить
+                    </button>
+                </td>
+            </tr>
+        </>
     )
 }
 

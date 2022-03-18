@@ -7,19 +7,14 @@ import {getTotalCount} from "../../redux/itemsReducer";
 const Header = () => {
     const totalCount = useSelector(getTotalCount);
     return (
-        <header className={`${s.app__header} ${s.header}`}>
-            <div className="container">
-                <div className={s.header__row}>
-                    <div className={s.header__column}>
-                        <div className={s.login__info}>
-                            <NavLink to={`catalog`}>Каталог</NavLink>
-                        </div>
-                    </div>
-                    <div className={s.header__column}>
-                        <div className={s.login__info}>
-                            <NavLink to={`cart`}>Корзина {(totalCount !== 0 && totalCount) && `(${totalCount})`}</NavLink>
-                        </div>
-                    </div>
+        <header className={s.header}>
+            <div className={s.header__row}>
+                <div className={s.header__column}>
+                    <NavLink className="button" to={`catalog`}>Каталог</NavLink>
+                </div>
+                <div className={s.header__column}>
+                    <NavLink className={`${s.header__button} button`}
+                             to={`cart`}>Корзина {(totalCount !== 0 && totalCount) && `(${totalCount})`}</NavLink>
                 </div>
             </div>
         </header>

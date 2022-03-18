@@ -1,0 +1,13 @@
+.table{
+    /*padding: 2%;*/
+}
+.table td, th{
+    border: 2px solid #5e2431;
+    border-radius: 5px;
+    color: #060202;
+}
+
+
+.table__button{
+    margin: 1%;
+}

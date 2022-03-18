@@ -75,30 +75,33 @@ h1, h2, h3, h4, h5, h6 {
   background-color: #FFEDED;
   color: #060202;
   font-size: 20px;
-  line-height: 1.8;
+  line-height: 1.4;
 }
 .app__wrapper{
   min-height: 100vh;
   text-align: center;
   overflow: hidden;
-}
-.content{
-  margin: 0 0.5%;
-  min-height: 100vh;
   display: flex;
   justify-content: center;
   flex-direction: column;
-  background-color: #FFD0D0;
+  margin: 0 0.5%;
 }
+
 @media all and (min-width: 1000px) {
-  .content {
+  .app__wrapper {
     margin: 0 15%;
   }
 }
 
+.content{
+  min-height: 100vh;
+  background-color: #FFD0D0;
+}
+
 .content__load{
   display: flex;
-  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
   flex: 1 1 100%;
   margin: 0;
   min-height: 100%;
@@ -109,9 +112,9 @@ h1, h2, h3, h4, h5, h6 {
   background-color: #5e2431;
   color: #FFF9F9;
   text-align: center;
-  font-size: 21px;
+  font-size: 20px;
   line-height: 1.4;
   border-radius: 5px;
   margin: 2% 0;
-  padding: 6px;
+  padding: 8px;
 }

@@ -21,7 +21,9 @@ const Catalog: FC<PropsType> = (props) => {
         />)
     return (
         <div className={s.catalog}>
-            {catalogElement}
+            <div className={s.catalog__row}>
+                {catalogElement}
+            </div>
         </div>
     )
 }

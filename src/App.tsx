@@ -7,20 +7,18 @@ import Cart from "./components/Cart/Cart";
 import {useDispatch, useSelector} from "react-redux";
 import {getItemsList, requestItems} from "./redux/itemsReducer";
 import Preloader from "./components/Common/Preloader/Preloader";
-import {log} from "util";
+
+//localStorage.clear();
 
 function App() {
     const [loading, setLoading] = useState(false);
     const itemsList = useSelector(getItemsList);
-    // const cartItems = useSelector(getCartItems);
-    // console.log(cartItems);
     const dispatch = useDispatch();
     useEffect(() => {
         (async () => {
             setLoading(true);
             await dispatch(requestItems());
             setLoading(false);
-            console.log("Произошло сетание")
         })()
     }, [dispatch])
     if (loading) {
@@ -43,7 +41,6 @@ function App() {
                                 <Route path="/cart" element={<Cart/>}/>
                                 <Route path="/" element={<div>Welcome to AppEvent shopping catalog</div>}/>
                                 <Route path="*" element={<div>404 PAGE NOT FOUND</div>}/>
-                                {/*<Route path="" element={}/>*/}
                             </Routes>
                         </div>
                     </div>

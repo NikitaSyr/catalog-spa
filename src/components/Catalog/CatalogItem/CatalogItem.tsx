@@ -1,6 +1,6 @@
 import React from 'react';
 import Preloader from "../../Common/Preloader/Preloader";
-import './../../../App.css';
+import s from './CatalogItem.module.css';
 
 
 type PropsType = {
@@ -11,21 +11,17 @@ type PropsType = {
     addItemToCartById: (id: number) => void
 }
 
-
 const CatalogItem: React.FC<PropsType> = ({id, image, name, price, addItemToCartById}) => {
-    // const handleClick = useSelector(addToCart(id));
-    // const dispatch = useDispatch();
-    // useEffect(() => {
-    //     dispatch(addToCart(id));
-    // }, [dispatch])
     return (
-        <div>
-            <div>Название : "{name}"</div>
-            <div>Цена : {price} руб.</div>
-            {/*{image*/}
-            {/*    ? <img src={image} alt=""/>*/}
-            {/*    : <Preloader/>}*/}
-            <button className="button"
+        <div className={s.catalog__item}>
+            <div className={s.item__image}>
+                {image
+                    ? <img src={image} alt="" className={s.image__content}/>
+                    : <Preloader/>}
+            </div>
+            <div className={s.item__name}>"{name}"</div>
+            <div className={s.item__price}>Цена : {price} руб.</div>
+            <button className={`${s.item__button} button`}
                     onClick={() => {
                         addItemToCartById(id)
                     }}
