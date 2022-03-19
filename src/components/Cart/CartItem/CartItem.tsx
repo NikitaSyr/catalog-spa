@@ -22,7 +22,7 @@ const CartItem: React.FC<PropsType> = ({
     return (
 
         <>
-            <tr className={t.table}>
+            <tbody className={t.table}>
 
                 <td>"{name}"</td>
                 <td>{price} руб.</td>
@@ -47,7 +47,7 @@ const CartItem: React.FC<PropsType> = ({
                     >Удалить
                     </button>
                 </td>
-            </tr>
+            </tbody>
         </>
     )
 }

@@ -97,6 +97,16 @@ h1, h2, h3, h4, h5, h6 {
   margin: 2% 0;
   padding: 8px;
 }
+.button:hover{
+  background-color: #52232E;
+  color: #BFBCBC;
+}
+
+.button:active{
+  background-color: #411923;
+  color: #BFBCBC;
+}
+
 .content{
   min-height: 100vh;
   background-color: #FFD0D0;
@@ -112,9 +122,15 @@ h1, h2, h3, h4, h5, h6 {
   height: 82%;
 }
 
-@media all and (min-width: 1000px) {
+@media all and (min-width: 1161px) {
   .app__wrapper {
     margin: 0 15%;
+  }
+}
+
+@media all and (max-width: 1334px) {
+  .app {
+    font-size: 18px;
   }
 }
 
@@ -131,7 +147,7 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-@media all and (max-width: 330px) {
+@media all and (max-width: 360px) {
   .app {
     font-size: 12px;
     line-height: 1.1;
