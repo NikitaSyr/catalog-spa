@@ -21,29 +21,24 @@ function App() {
             setLoading(false);
         })()
     }, [dispatch])
-    if (loading) {
-        return (
-            <div className="app">
-                <div className="app__wrapper">
-                    <Preloader/>
-                </div>
-            </div>)
-    }
     return (
         <HashRouter>
             <div className="app">
                 <div className="app__wrapper">
-                    <div className="content">
-                        <Header/>
-                        <div className="content__load">
-                            <Routes>
-                                <Route path="/catalog" element={<Catalog itemsList={itemsList}/>}/>
-                                <Route path="/cart" element={<Cart/>}/>
-                                <Route path="/" element={<div>Welcome to AppEvent shopping catalog</div>}/>
-                                <Route path="*" element={<div>404 PAGE NOT FOUND</div>}/>
-                            </Routes>
+                    {loading
+                        ? <Preloader/>
+                        : <div className="content">
+                            <Header/>
+                            <div className="content__load">
+                                <Routes>
+                                    <Route path="/catalog" element={<Catalog itemsList={itemsList}/>}/>
+                                    <Route path="/cart" element={<Cart/>}/>
+                                    <Route path="/" element={<div>Добро пожаловать в магазин AppEvent</div>}/>
+                                    <Route path="*" element={<div>404 СТРАНИЦА НЕ НАЙДЕНА</div>}/>
+                                </Routes>
+                            </div>
                         </div>
-                    </div>
+                    }
                 </div>
             </div>
         </HashRouter>

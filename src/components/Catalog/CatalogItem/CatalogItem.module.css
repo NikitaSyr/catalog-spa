@@ -6,13 +6,13 @@
 
 .item__image {
     margin: auto;
-    max-width: 204px;
+    max-width: 254px;
     border-radius: 7px;
     border: 2px solid #5e2431;
     object-fit: contain;
 }
 
 .image__content {
-    max-width: 200px;
+    max-width: 250px;
     border-radius: 7px;
 }
