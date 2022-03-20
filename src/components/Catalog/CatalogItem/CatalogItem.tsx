@@ -33,4 +33,12 @@ const CatalogItem: React.FC<PropsType> = ({id, image, name, price, addItemToCart
     )
 }
 
-export default React.memo(CatalogItem);
+
+function areEqual(prevProps: PropsType , nextProps: PropsType) {
+    return prevProps.id === nextProps.id
+        && prevProps.image === nextProps.image
+        && prevProps.name === nextProps.name
+        && prevProps.price === nextProps.price;
+}
+
+export default React.memo(CatalogItem, areEqual);
