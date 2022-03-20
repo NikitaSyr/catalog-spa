@@ -33,4 +33,4 @@ const CatalogItem: React.FC<PropsType> = ({id, image, name, price, addItemToCart
     )
 }
 
-export default CatalogItem;
+export default React.memo(CatalogItem);
