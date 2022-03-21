@@ -1,4 +1,4 @@
-import {FC} from "react";
+import {FC, useCallback} from "react";
 import {ItemsType} from "../../types/types";
 import CatalogItem from "./CatalogItem/CatalogItem";
 import s from './Catalog.module.css';
@@ -11,10 +11,13 @@ type PropsType = {
 
 const Catalog: FC<PropsType> = (props) => {
     const dispatch = useDispatch();
-    const addItemToCartById = (id: number) => {
-        dispatch(actions.addToCartAC(id))
-    }
-
+    // const addItemToCartById = (id: number) => {
+    //     dispatch(actions.addToCartAC(id))
+    // }
+    const addItemToCartById = useCallback(
+        (id: number) => dispatch(actions.addToCartAC(id)),
+        [dispatch]
+    );
     const catalogElement = props.itemsList.map(item =>
         <CatalogItem key={item.id} id={item.id} image={item.image} name={item.name} price={item.price}
                      addItemToCartById={addItemToCartById}

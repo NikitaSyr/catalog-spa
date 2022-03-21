@@ -38,7 +38,8 @@ function areEqual(prevProps: PropsType , nextProps: PropsType) {
     return prevProps.id === nextProps.id
         && prevProps.image === nextProps.image
         && prevProps.name === nextProps.name
-        && prevProps.price === nextProps.price;
+        && prevProps.price === nextProps.price
+        && prevProps.addItemToCartById === nextProps.addItemToCartById;
 }
 
 export default React.memo(CatalogItem, areEqual);
