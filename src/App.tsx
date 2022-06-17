@@ -11,6 +11,7 @@ import Preloader from "./components/Common/Preloader/Preloader";
 //localStorage.clear();
 
 function App() {
+
     const [loading, setLoading] = useState(false);
     const itemsList = useSelector(getItemsList);
     const dispatch = useDispatch();
@@ -21,6 +22,7 @@ function App() {
             setLoading(false);
         })()
     }, [dispatch])
+
     return (
         <HashRouter>
             <div className="app">
